@@ -18,7 +18,7 @@ class Predictor(BasePredictor):
         self.face_swapper = insightface.model_zoo.get_model('cache/inswapper_128.onnx', providers=['CUDAExecutionProvider'])
         self.face_enhancer = gfpgan.GFPGANer(model_path='cache/GFPGANv1.4.pth', upscale=1)
         self.face_analyser = FaceAnalysis(name='buffalo_l')
-        self.face_analyser.prepare(ctx_id=0, det_size=(640, 640))
+        self.face_analyser.prepare(ctx_id=0, det_size=(512, 512))
 
     def get_face(self, img_data):
         analysed = self.face_analyser.get(img_data)
