@@ -16,9 +16,9 @@ class Predictor(BasePredictor):
         """Load the model into memory to make running multiple predictions efficient"""
         # self.face_swapper = insightface.model_zoo.get_model('cache/inswapper_128.onnx', providers=onnxruntime.get_available_providers())
         self.face_swapper = insightface.model_zoo.get_model('cache/inswapper_128.onnx', providers=['CUDAExecutionProvider'])
-        self.face_enhancer = gfpgan.GFPGANer(model_path='cache/GFPGANv1.4.pth', upscale=1)
-        self.face_analyser = FaceAnalysis(name='buffalo_l')
-        self.face_analyser.prepare(ctx_id=0, det_size=(512, 512))
+        # self.face_enhancer = gfpgan.GFPGANer(model_path='cache/GFPGANv1.4.pth', upscale=1)
+        self.face_analyser = FaceAnalysis(name='buffalo_s')
+        self.face_analyser.prepare(ctx_id=0, det_size=(640, 640))
 
     def get_face(self, img_data):
         analysed = self.face_analyser.get(img_data)
@@ -45,10 +45,10 @@ class Predictor(BasePredictor):
                 print("printing shapes failed.")
             result = self.face_swapper.get(frame, face, source_face, paste_back=True)
 
-            _, _, result = self.face_enhancer.enhance(
-                result,
-                paste_back=True
-            )
+            # _, _, result = self.face_enhancer.enhance(
+            #     result,
+            #     paste_back=True
+            # )
             out_path = Path(tempfile.mkdtemp()) / f"{str(int(time.time()))}.jpg"
             cv2.imwrite(str(out_path), result)
             return out_path
