@@ -13,7 +13,7 @@ build:
   python_packages:
     - "torchvision"
     - "insightface==0.7.3"
-    - "onnxruntime-gpu"
+    - "onnxruntime"
     - "gfpgan"
   run:
     - "mkdir -p /root/.insightface/models/buffalo_l/"
