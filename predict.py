@@ -14,9 +14,8 @@ import time
 class Predictor(BasePredictor):
     def setup(self):
         """Load the model into memory to make running multiple predictions efficient"""
-        # self.face_swapper = insightface.model_zoo.get_model('cache/inswapper_128.onnx', providers=onnxruntime.get_available_providers())
         self.face_swapper = insightface.model_zoo.get_model('cache/inswapper_128.onnx', providers=['CPUExecutionProvider'])
-        self.face_enhancer = gfpgan.GFPGANer(model_path='cache/GFPGANv1.4.pth', upscale=1)
+        self.face_enhancer = gfpgan.GFPGANer(model_path='cache/GFPGANv1.4.pth', upscale=1, device='cpu')
         self.face_analyser = FaceAnalysis(name='buffalo_l', providers=['CPUExecutionProvider'])
         self.face_analyser.prepare(ctx_id=0, det_size=(640, 640))
 
