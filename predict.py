@@ -38,10 +38,7 @@ class Predictor(BasePredictor):
             frame = cv2.imread(str(target_image))
             face = self.get_face(frame)
             source_face = self.get_face(cv2.imread(str(swap_image)))
-            try:
-                print(frame.shape, face.shape, source_face.shape)
-            except Exception:
-                print("printing shapes failed.")
+
             result = self.face_swapper.get(frame, face, source_face, paste_back=True)
 
             _, _, result = self.face_enhancer.enhance(
