@@ -45,10 +45,10 @@ class Predictor(BasePredictor):
                 print("printing shapes failed.")
             result = self.face_swapper.get(frame, face, source_face, paste_back=True)
 
-            _, _, result = self.face_enhancer.enhance(
-                result,
-                paste_back=True
-            )
+            # _, _, result = self.face_enhancer.enhance(
+            #     result,
+            #     paste_back=True
+            # )
             out_path = Path(tempfile.mkdtemp()) / f"{str(int(time.time()))}.jpg"
             cv2.imwrite(str(out_path), result)
             return out_path
