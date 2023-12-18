@@ -3,7 +3,6 @@
 
 from cog import BasePredictor, Input, Path
 import insightface
-import onnxruntime
 from insightface.app import FaceAnalysis
 import cv2
 import gfpgan
